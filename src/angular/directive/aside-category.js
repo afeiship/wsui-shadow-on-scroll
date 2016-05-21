@@ -7,19 +7,41 @@
         restrict: 'E',
         scope: {
           cssClass: '@',
-          items: '='
+          items: '=',
+          activeIndex: '='
         },
-        template: '<div class="ng-widget-tabs {{cssClass}}">' +
-        '<ul class="tab-hd">' +
-        '<li class="tab-hd-item" ng-repeat="item in items" data-active="{{item.selected}}">' +
-        '<a href="javascript:;" ng-click="select(item)">{{item.title}}</a>' +
-        '</li>' +
-        '</ul>' +
-        '<div class="tab-bd" ng-transclude></div>' +
-        '</div>'
+        template: '<nx-active-items active-index="activeIndex" css-class="nx-widget-aside-category {{cssClass}}" items="items">' +
+        '<nx-active-item ng-click="scrollIntoView()" ng-repeat="item in items track by $index">{{item.name}} <b class="badge">{{item.count}}</b></nx-active-item>' +
+        '</nx-active-items>',
+        link: function (scope, element) {
+          var activeElement;
+          scope.scrollIntoView = function () {
+            activeElement = element[0].querySelector('[data-active=true]');
+            _scrollTo(element[0], _offset(activeElement).top + element[0].scrollTop, 400);
+          };
+        }
       };
 
     }]);
+
+
+  /*private*/
+  function _offset(inElement) {
+    return inElement && inElement.getBoundingClientRect();
+  }
+
+  /*private*/
+  function _scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+
+    setTimeout(function () {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop == to) return;
+      _scrollTo(element, to, duration - 10);
+    }, 10);
+  }
 
 
 })();
