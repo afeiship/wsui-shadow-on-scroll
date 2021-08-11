@@ -6,6 +6,9 @@ $wsui-shadow-on-scroll-options: (
   shadow: 0px 2px 5px rgba(0, 0, 0, 0.5),
 ) !default;
 
+// https://stijndewitt.com/2018/06/12/pure-css-drop-shadow-on-scroll/
+// https://codepen.io/StijnDeWitt/pen/LryNxa
+
 .wsui-shadow-on-scroll {
   $height: map-get($wsui-shadow-on-scroll-options, "height");
   $distance: map-get($wsui-shadow-on-scroll-options, "distance");
