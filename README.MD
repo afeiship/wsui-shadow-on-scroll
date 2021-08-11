@@ -1,43 +1,39 @@
-#angular-aside-category
-AngularJS directive for aside category.
+# wsui-shadow-on-scroll
+> Pure CSS drop shadow on scroll.
 
-##usage:
-+ bower install `afeiship/angular-aside-category` --save
-+ html part:
-```html
-<nx-aside-category items="vm.items" active-index="vm.activeIndex">
-</nx-aside-category>
+[![version][version-image]][version-url]
+[![license][license-image]][license-url]
+[![size][size-image]][size-url]
+[![download][download-image]][download-url]
+
+## installation
+```shell
+npm i @jswork/wsui-shadow-on-scroll
 ```
 
-+ javascript part:
-```javascript
-var TestModule = angular.module('TestApp', ['nx.widget'])
-    .controller('MainCtrl', function ($scope) {
-      var vm = this;
-
-      vm.items = _generateItems();
-      vm.activeIndex = 0;
-
-
-      $scope.$watch(function(){
-        return vm.activeIndex;
-      },function(inIndex){
-        console.log('activeItem',vm.items[inIndex]);
-      });
-
-      function _generateItems() {
-        var result = [];
-        for (var i = 0; i < 40; i++) {
-          result.push({
-            id: i,
-            name: '分类XX' + i
-          });
-        }
-        return result;
-      }
-
-    });
+## usage
+```scss
+// use sass
+@import '~@jswork/wsui-shadow-on-scroll/dist/index.scss';
+// use css
+@import '~@jswork/wsui-shadow-on-scroll/dist/style.css';
 ```
 
-##demo:
-+ https://github.com/afeiship/angular-aside-category/blob/master/test/test.html
+## preview
+- https://afeiship.github.io/wsui-shadow-on-scroll/
+
+## license
+Code released under [the MIT license](https://github.com/afeiship/wsui-shadow-on-scroll/blob/master/LICENSE.txt).
+
+[version-image]: https://img.shields.io/npm/v/@jswork/wsui-shadow-on-scroll
+[version-url]: https://npmjs.org/package/@jswork/wsui-shadow-on-scroll
+
+[license-image]: https://img.shields.io/npm/l/@jswork/wsui-shadow-on-scroll
+[license-url]: https://github.com/afeiship/wsui-shadow-on-scroll/blob/master/LICENSE.txt
+
+[size-image]: https://img.shields.io/bundlephobia/minzip/@jswork/wsui-shadow-on-scroll
+[size-url]: https://github.com/afeiship/wsui-shadow-on-scroll/blob/master/dist/wsui-shadow-on-scroll.min.js
+
+[download-image]: https://img.shields.io/npm/dm/@jswork/wsui-shadow-on-scroll
+[download-url]: https://www.npmjs.com/package/@jswork/wsui-shadow-on-scroll
+

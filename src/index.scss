@@ -1,0 +1,59 @@
+/*wsui-shadow-on-scroll Start*/
+$wsui-shadow-on-scroll-options: (
+  height: 80px,
+  distance: 16px,
+  cover: linear-gradient(white 10%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.4) 70%, transparent),
+  shadow: 0px 2px 5px rgba(0, 0, 0, 0.5),
+) !default;
+
+.wsui-shadow-on-scroll {
+  $height: map-get($wsui-shadow-on-scroll-options, "height");
+  $distance: map-get($wsui-shadow-on-scroll-options, "distance");
+  $cover: map-get($wsui-shadow-on-scroll-options, "cover");
+  $shadow: map-get($wsui-shadow-on-scroll-options, "shadow");
+
+  height: 80px;
+  position: sticky;
+
+  top: -$distance;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+
+  /* PSEUDO ELEMENTS to create drop-shadow */
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: $distance;
+    /* make pseudo elements sticky as well */
+    position: sticky;
+  }
+
+  /* SHADOW */
+  &::before {
+    top: $height - $distance * 2;
+    /* shadow is at bottom of element, so at 48 + 16 = 64px */
+    box-shadow: $shadow;
+  }
+
+  /* COVER */
+  &::after {
+    /* linear gradient from background color to transparent acts as
+     a transition effect so the shadow appears gradually */
+    background: $cover;
+    top: 0;
+    /* cover should fall over shadow */
+    z-index: 2;
+  }
+
+  & .is-toolbar {
+    height: $height - $distance;
+    position: sticky;
+    top: 0px;
+    /* compensate for shadow with negative margin */
+    margin-top: -$distance;
+    /* content should fall over shadow and cover */
+    z-index: 3;
+  }
+}
+/*wsui-shadow-on-scroll End*/
