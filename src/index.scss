@@ -1,24 +1,17 @@
 /*wsui-shadow-on-scroll Start*/
-$wsui-shadow-on-scroll-options: (
-  height: 80px,
-  distance: 16px,
-  cover: linear-gradient(white 10%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.4) 70%, transparent),
-  shadow: 0px 2px 5px rgba(0, 0, 0, 0.5),
-) !default;
-
 // https://stijndewitt.com/2018/06/12/pure-css-drop-shadow-on-scroll/
 // https://codepen.io/StijnDeWitt/pen/LryNxa
 
 .wsui-shadow-on-scroll {
-  $height: map-get($wsui-shadow-on-scroll-options, "height");
-  $distance: map-get($wsui-shadow-on-scroll-options, "distance");
-  $cover: map-get($wsui-shadow-on-scroll-options, "cover");
-  $shadow: map-get($wsui-shadow-on-scroll-options, "shadow");
+  --wsui-opts-sos-height: 80px;
+  --wsui-opts-sos-distance: 16px;
+  --wsui-opts-sos-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  --wsui-opts-sos-cover: linear-gradient(white 10%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.4) 70%, transparent);
 
-  height: 80px;
+  height: var(--wsui-opts-sos-height);
   position: sticky;
 
-  top: -$distance;
+  top: calc(var(--wsui-opts-sos-distance) * -1);
   z-index: 1;
   -webkit-backface-visibility: hidden;
 
@@ -27,34 +20,34 @@ $wsui-shadow-on-scroll-options: (
   &::after {
     content: "";
     display: block;
-    height: $distance;
+    height: var(--wsui-opts-sos-distance);
     /* make pseudo elements sticky as well */
     position: sticky;
   }
 
   /* SHADOW */
   &::before {
-    top: $height - $distance * 2;
+    top: calc(var(--wsui-opts-sos-height) - var(--wsui-opts-sos-distance) * 2);
     /* shadow is at bottom of element, so at 48 + 16 = 64px */
-    box-shadow: $shadow;
+    box-shadow: var(--wsui-opts-sos-shadow);
   }
 
   /* COVER */
   &::after {
     /* linear gradient from background color to transparent acts as
      a transition effect so the shadow appears gradually */
-    background: $cover;
+    background: var(--wsui-opts-sos-cover);
     top: 0;
     /* cover should fall over shadow */
     z-index: 2;
   }
 
   & .is-toolbar {
-    height: $height - $distance;
+    height: calc(var(--wsui-opts-sos-height) - var(--wsui-opts-sos-distance));
     position: sticky;
     top: 0px;
     /* compensate for shadow with negative margin */
-    margin-top: -$distance;
+    margin-top: calc(var(--wsui-opts-sos-distance) * -1);
     /* content should fall over shadow and cover */
     z-index: 3;
   }
